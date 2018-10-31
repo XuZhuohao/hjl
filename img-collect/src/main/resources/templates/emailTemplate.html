@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>邮件发送模板</title>
+</head>
+<body style="background: aqua">
+    <p th:text="${word}" style="font-size: 18px;"></p>
+    <div th:each="image : ${images}">
+        <img src="cid" th:src="'cid:' + ${ image.getCid()}">
+    </div>
+</body>
+</html>
