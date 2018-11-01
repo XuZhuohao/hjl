@@ -43,6 +43,7 @@ public class EmailTimer {
     @Scheduled(cron = "0 0 6 * * ? ")
     public void sendEmail(){
         UserEntity userEntityCls = new UserEntity();
+        userEntityCls.setSend(true);
         Example<UserEntity> example = Example.of(userEntityCls);
         List<UserEntity> userEntities = userRepository.findAll(example);
         userEntities.forEach(userEntity -> {
