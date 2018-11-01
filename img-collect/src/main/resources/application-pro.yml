@@ -4,11 +4,12 @@ image:
   bing-disk-path: /data/service/hjl/image
 
 email:
-  send-admin-mail: http://localhost:8081/email/send
+  send-admin-mail: http://localhost:8082/email/send
+  test-password: 1234
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1/img-collect?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true
+    url: jdbc:mysql://xuzhuohao/img-collect?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true
     username: root
     password: a
     driver-class-name: com.mysql.jdbc.Driver
@@ -25,4 +26,4 @@ eureka:
     serviceUrl:
       defaultZone: http://system-server-1:8761/eureka/
 server:
-  port: 8080
+  port: 8083
