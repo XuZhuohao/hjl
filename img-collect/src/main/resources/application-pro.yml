@@ -1,7 +1,7 @@
 
 image:
   bing-main-url: https://cn.bing.com
-  bing-disk-path: D:\File\image-collect\bing
+  bing-disk-path: /data/service/hjl/image
 
 email:
   send-admin-mail: http://localhost:8081/email/send

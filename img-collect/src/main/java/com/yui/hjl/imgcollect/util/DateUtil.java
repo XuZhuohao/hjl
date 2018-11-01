@@ -18,12 +18,20 @@ public class DateUtil {
 
     /**
      * 获取当前天，1-365（366）
-     * @param date
-     * @return
+     * @param date 传入时间
+     * @return d
      */
     public static int getD(Date date){
         SimpleDateFormat sf = new SimpleDateFormat("D");
-        System.out.println(sf.format(date));
+        return Integer.valueOf(sf.format(date));
+    }
+    /**
+     * 获取当前天，1-365（366）
+     * @param date 传入时间
+     * @return YYYYMM
+     */
+    public static int getYYYYMM(Date date){
+        SimpleDateFormat sf = new SimpleDateFormat("YYYYMM");
         return Integer.valueOf(sf.format(date));
     }
 
