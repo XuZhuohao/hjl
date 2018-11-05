@@ -8,6 +8,7 @@ import com.yui.hjl.imgcollect.entity.vo.ImageVo;
 import com.yui.hjl.imgcollect.repository.LoveWordRepository;
 import com.yui.hjl.imgcollect.repository.UserRepository;
 import com.yui.hjl.imgcollect.service.ImageCollect;
+import com.yui.hjl.imgcollect.timer.EmailTimer;
 import com.yui.hjl.imgcollect.util.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +38,8 @@ public class ImageCollectTest {
     private TemplateEngine templateEngine;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private EmailTimer emailTimer;
 
     @Test
     public void test1() {
@@ -59,7 +62,7 @@ public class ImageCollectTest {
     }
 
     @Test
-    public void testTemplate02(){
+    public void testTemplate02() {
         Context context = new Context();
         context.setVariable("word", "宝贝，" + "wo ai 你");
         Set<ImageVo> imageVos = new HashSet<>(16);
@@ -81,20 +84,27 @@ public class ImageCollectTest {
     }
 
     @Test
-    public void testWordEntity(){
+    public void testWordEntity() {
         LoveWordEntity loveWordEntity = new LoveWordEntity();
         loveWordEntity.setUseDate(DateUtil.getD(new Date()));
         loveWordEntity.setWord("我爱你呀！！");
         loveWordEntity.setDelete(true);
+        loveWordEntity.setNickName("test01");
         loveWordRepository.save(loveWordEntity);
     }
+
     @Test
-    public void testUserEntity(){
+    public void testUserEntity() {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername("admin");
         userEntity.setSend(true);
         userEntity.setEmail("651334311@qq.com");
         userEntity.setNickName("xzh");
         userRepository.save(userEntity);
+    }
+
+    @Test
+    public void testTimer() {
+        emailTimer.sendEmail();
     }
 }

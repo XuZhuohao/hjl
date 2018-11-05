@@ -50,15 +50,17 @@ public class EmailTemplateImpl implements EmailTemplate {
         try {
             LoveWordEntity loveWordEntity = new LoveWordEntity();
             loveWordEntity.setUseDate(DateUtil.getD(new Date()));
+            loveWordEntity.setDelete(false);
             Example<LoveWordEntity> example = Example.of(loveWordEntity);
             LoveWordEntity theLoveWordEntity = loveWordRepository.findAll(example).get(0);
             String nickName = theLoveWordEntity.getNickName() != null ? theLoveWordEntity.getNickName() : user.getNickName();
             word = nickName + "," + theLoveWordEntity.getWord();
             theLoveWordEntity.setTimes(theLoveWordEntity.getTimes() + 1);
+            loveWordRepository.save(theLoveWordEntity);
         } catch (Exception e){
             word = user.getNickName() + "，我爱你呦!!";
+            e.printStackTrace();
         }
-
         Context context = new Context();
         context.setVariable("images", imageVos);
         context.setVariable("word", word);
