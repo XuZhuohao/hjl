@@ -17,4 +17,7 @@ import org.springframework.context.annotation.Configuration;
 public class UseProperties {
     @Value("${email.send-admin-mail}")
     private String sendAdminMail ;
+
+    @Value("${email.test-password}")
+    private String password;
 }

@@ -30,7 +30,13 @@ public class EmailController {
     private UseProperties useProperties;
 
     @GetMapping("test")
-    public void sendEmailEveryDate() throws URISyntaxException {
+    public void sendEmailEveryDate(String password) throws URISyntaxException {
+        if(password == null) {
+            return;
+        }
+        if (!password.equals(useProperties.getPassword()) && useProperties.getPassword() != null){
+            return;
+        }
         EmailVo emailVo = emailTemplate.getEmailEntity("651334311@qq.com");
         ResponseEntity<Map> result = this.restTemplate.postForEntity(useProperties.getSendAdminMail(), emailVo, Map.class);
         System.out.println(result);
