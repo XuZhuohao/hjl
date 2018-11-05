@@ -1,5 +1,6 @@
 package com.yui.hjl.imgcollect.service;
 
+import com.yui.hjl.imgcollect.entity.UserEntity;
 import com.yui.hjl.imgcollect.entity.vo.EmailVo;
 
 /**
@@ -10,5 +11,5 @@ import com.yui.hjl.imgcollect.entity.vo.EmailVo;
  */
 public interface EmailTemplate {
 
-    EmailVo getEmailEntity(String toUser);
+    EmailVo getEmailEntity(UserEntity toUser);
 }

@@ -23,4 +23,6 @@ public class UserEntity extends BaseEntity {
 
     @Column(columnDefinition = "tinyint default 0")
     private boolean isSend;
+    
+    private String nickName;
 }

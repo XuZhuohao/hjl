@@ -1,6 +1,7 @@
 package com.yui.hjl.imgcollect.service.impl;
 
 import com.yui.hjl.imgcollect.entity.LoveWordEntity;
+import com.yui.hjl.imgcollect.entity.UserEntity;
 import com.yui.hjl.imgcollect.entity.vo.EmailVo;
 import com.yui.hjl.imgcollect.entity.vo.ImageVo;
 import com.yui.hjl.imgcollect.repository.LoveWordRepository;
@@ -33,7 +34,7 @@ public class EmailTemplateImpl implements EmailTemplate {
     @Resource
     private TemplateEngine templateEngine;
     @Override
-    public EmailVo getEmailEntity(String toUser) {
+    public EmailVo getEmailEntity(UserEntity user) {
         EmailVo emailEntity = new EmailVo();
         // 获取图片
         Set<ImageVo> imageVos = new HashSet<>(16);
@@ -51,10 +52,10 @@ public class EmailTemplateImpl implements EmailTemplate {
             loveWordEntity.setUseDate(DateUtil.getD(new Date()));
             Example<LoveWordEntity> example = Example.of(loveWordEntity);
             LoveWordEntity theLoveWordEntity = loveWordRepository.findAll(example).get(0);
-            word = "宝贝，" + theLoveWordEntity.getWord();
+            word = user.getNickName() + "," + theLoveWordEntity.getWord();
             theLoveWordEntity.setTimes(theLoveWordEntity.getTimes() + 1);
         } catch (Exception e){
-            word = "宝贝，我爱你呦!!";
+            word = user.getNickName() + "，我爱你呦!!";
         }
 
         Context context = new Context();
@@ -64,7 +65,7 @@ public class EmailTemplateImpl implements EmailTemplate {
         emailEntity.setContent(text);
         emailEntity.setSubject("每日图片");
         emailEntity.setFromUser("786725551@qq.com");
-        emailEntity.setToUser(toUser);
+        emailEntity.setToUser(user.getEmail());
         return emailEntity;
     }
 }

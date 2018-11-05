@@ -47,7 +47,7 @@ public class EmailTimer {
         Example<UserEntity> example = Example.of(userEntityCls);
         List<UserEntity> userEntities = userRepository.findAll(example);
         userEntities.forEach(userEntity -> {
-            EmailVo emailVo = emailTemplate.getEmailEntity(userEntity.getEmail());
+            EmailVo emailVo = emailTemplate.getEmailEntity(userEntity);
             ResponseEntity<Map> result = this.restTemplate.postForEntity(useProperties.getSendAdminMail(), emailVo, Map.class);
             System.out.println(result);
         });

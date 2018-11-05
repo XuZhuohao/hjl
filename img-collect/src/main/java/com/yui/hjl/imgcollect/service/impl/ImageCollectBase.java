@@ -43,6 +43,7 @@ abstract class ImageCollectBase implements ImageCollect, Runnable {
         this.saveImageInfo(this.imageEntityList);
         imageEntityList.forEach(imageEntity -> {
             try {
+                // TODO: MD5校验
                 Map<String, Object> result = ImageUtil.downloadImage(imageEntity.getUrl(), imageEntity.getDiskPath());
                 imageEntity.setSize(Long.valueOf(result.get("size").toString()));
                 imageEntity.setDownload(true);
