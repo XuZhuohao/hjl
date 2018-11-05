@@ -3,6 +3,7 @@ package com.yui.hjl.imgcollect.controller;
 import com.yui.hjl.imgcollect.config.UseProperties;
 import com.yui.hjl.imgcollect.entity.vo.EmailVo;
 import com.yui.hjl.imgcollect.service.EmailTemplate;
+import com.yui.hjl.imgcollect.timer.EmailTimer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,8 @@ public class EmailController {
     @Autowired
     private UseProperties useProperties;
 
+    @Autowired
+    private EmailTimer emailTimer;
     @GetMapping("test")
     public void sendEmailEveryDate(String password) throws URISyntaxException {
         if(password == null) {
@@ -37,9 +40,7 @@ public class EmailController {
         if (!password.equals(useProperties.getPassword()) && useProperties.getPassword() != null){
             return;
         }
-        EmailVo emailVo = emailTemplate.getEmailEntity("651334311@qq.com");
-        ResponseEntity<Map> result = this.restTemplate.postForEntity(useProperties.getSendAdminMail(), emailVo, Map.class);
-        System.out.println(result);
+        emailTimer.sendEmail();
     }
 
 }
