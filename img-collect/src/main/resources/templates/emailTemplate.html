@@ -7,7 +7,7 @@
 <body style="background: aqua">
     <p th:text="${word}" style="font-size: 18px;"></p>
     <div th:each="image : ${images}">
-        <img src="cid" th:src="'cid:' + ${ image.getCid()}">
+        <img style="width:800px" src="cid" th:src="'cid:' + ${ image.getCid()}">
     </div>
 </body>
 </html>

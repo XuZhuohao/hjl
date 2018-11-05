@@ -39,7 +39,7 @@ public class EmailTemplateImpl implements EmailTemplate {
         Set<ImageVo> imageVos = new HashSet<>(16);
         imageCollect.getImageObject().forEach(imageEntity -> {
             ImageVo imageVo = new ImageVo();
-            imageVo.setCid(imageEntity.getName());
+            imageVo.setCid(imageEntity.getName() + "." + imageEntity.getSuffix());
             imageVo.setSrc(imageEntity.getDiskPath());
             imageVos.add(imageVo);
         });
