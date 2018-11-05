@@ -52,7 +52,8 @@ public class EmailTemplateImpl implements EmailTemplate {
             loveWordEntity.setUseDate(DateUtil.getD(new Date()));
             Example<LoveWordEntity> example = Example.of(loveWordEntity);
             LoveWordEntity theLoveWordEntity = loveWordRepository.findAll(example).get(0);
-            word = user.getNickName() + "," + theLoveWordEntity.getWord();
+            String nickName = theLoveWordEntity.getNickName() != null ? theLoveWordEntity.getNickName() : user.getNickName();
+            word = nickName + "," + theLoveWordEntity.getWord();
             theLoveWordEntity.setTimes(theLoveWordEntity.getTimes() + 1);
         } catch (Exception e){
             word = user.getNickName() + "，我爱你呦!!";

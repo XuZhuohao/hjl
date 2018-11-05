@@ -3,8 +3,10 @@ package com.yui.hjl.imgcollect.om.yui.hjl.imgcollect.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.yui.hjl.imgcollect.entity.ImageEntity;
 import com.yui.hjl.imgcollect.entity.LoveWordEntity;
+import com.yui.hjl.imgcollect.entity.UserEntity;
 import com.yui.hjl.imgcollect.entity.vo.ImageVo;
 import com.yui.hjl.imgcollect.repository.LoveWordRepository;
+import com.yui.hjl.imgcollect.repository.UserRepository;
 import com.yui.hjl.imgcollect.service.ImageCollect;
 import com.yui.hjl.imgcollect.util.DateUtil;
 import org.junit.Test;
@@ -33,6 +35,8 @@ public class ImageCollectTest {
     private LoveWordRepository loveWordRepository;
     @Resource
     private TemplateEngine templateEngine;
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     public void test1() {
@@ -84,5 +88,13 @@ public class ImageCollectTest {
         loveWordEntity.setDelete(true);
         loveWordRepository.save(loveWordEntity);
     }
-
+    @Test
+    public void testUserEntity(){
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername("admin");
+        userEntity.setSend(true);
+        userEntity.setEmail("651334311@qq.com");
+        userEntity.setNickName("xzh");
+        userRepository.save(userEntity);
+    }
 }
