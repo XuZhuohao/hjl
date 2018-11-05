@@ -22,6 +22,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <!-- maven方式跳过maven test, 等同$ mvn package -Dmaven.test.skip=true -->
+        <!-- <maven.test.skip>true</maven.test.skip> -->
+        <!-- surefire plugin方式跳过maven test， 等同$ mvn package -DskipTests -->
+        <!--这里需要注意的是maven.test.skip，跳过了一切与test相关的类， 连.class都不生成， 如果允许junit测试会发现ClassNotFound错误，
+        而skipTests会编译测试类，即生成.class文件，只是不运行测试类， 你可以手动运行测试类。-->
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
