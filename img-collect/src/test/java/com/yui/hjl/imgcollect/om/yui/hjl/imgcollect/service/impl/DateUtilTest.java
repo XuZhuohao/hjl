@@ -16,4 +16,14 @@ public class DateUtilTest {
     public void testD () {
         System.out.println(DateUtil.getD(new Date()));
     }
+
+    @Test
+    public void testGetDate(){
+        System.out.println(DateUtil.getDate("20181002", "yyyyMMdd"));
+    }
+
+    @Test
+    public void testGetDateByD(){
+        System.out.println(DateUtil.getDateByD(11));
+    }
 }

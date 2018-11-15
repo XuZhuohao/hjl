@@ -60,6 +60,7 @@ public class EmailTemplateImpl implements EmailTemplate {
             String nickName = StringUtil.isNotNull(theLoveWordEntity.getNickName())? theLoveWordEntity.getNickName() : user.getNickName();
             word = nickName + "," + theLoveWordEntity.getWord();
             // 语言推送记录次数加1
+            theLoveWordEntity.setTimes(theLoveWordEntity.getTimes() == null? 0 : theLoveWordEntity.getTimes());
             theLoveWordEntity.setTimes(theLoveWordEntity.getTimes() + 1);
             loveWordRepository.save(theLoveWordEntity);
         } catch (Exception e){
