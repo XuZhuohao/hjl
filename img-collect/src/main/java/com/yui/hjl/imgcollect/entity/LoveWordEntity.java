@@ -18,6 +18,7 @@ import java.util.Date;
 @Entity(name = "loveWord")
 public class LoveWordEntity extends BaseEntity {
 
+    private String nickName;
 
     @Column(columnDefinition = "text", nullable = false)
     private String word;

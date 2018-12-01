@@ -1,5 +1,6 @@
 package com.yui.hjl.imgcollect.service;
 
+import com.yui.hjl.imgcollect.entity.UserEntity;
 import com.yui.hjl.imgcollect.entity.vo.EmailVo;
 
 /**
@@ -9,6 +10,10 @@ import com.yui.hjl.imgcollect.entity.vo.EmailVo;
  * @date 2018-10-29 22:16
  */
 public interface EmailTemplate {
-
-    EmailVo getEmailEntity(String toUser);
+    /**
+     * 邮件发送构建
+     * @param toUser 发送的user对象
+     * @return 邮件的json对象
+     */
+    EmailVo getEmailEntity(UserEntity toUser);
 }

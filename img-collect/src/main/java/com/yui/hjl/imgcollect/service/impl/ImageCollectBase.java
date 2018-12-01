@@ -28,6 +28,7 @@ abstract class ImageCollectBase implements ImageCollect, Runnable {
             ImageEntity imageObject = new ImageEntity();
             imageObject.setUrl(MAIN_URL + url);
             // 第一个 全称(index : 0)， 第二个 名字(index : 1)， 第三个 后缀 (index : 2)
+            // TODO: 正则表达式 "(([^/|^\\\\]*)[\\.]{1}([\\w]*))"
             List<String> dealUrls = ImageCollectUtil.getUrlByPatternOfStr("(([^/|.]*)[\\.]{1}(.*))", url, 1,2,3);
             imageObject.setName(dealUrls.get(1));
             imageObject.setSuffix(dealUrls.get(2));
@@ -43,6 +44,7 @@ abstract class ImageCollectBase implements ImageCollect, Runnable {
         this.saveImageInfo(this.imageEntityList);
         imageEntityList.forEach(imageEntity -> {
             try {
+                // TODO: MD5校验
                 Map<String, Object> result = ImageUtil.downloadImage(imageEntity.getUrl(), imageEntity.getDiskPath());
                 imageEntity.setSize(Long.valueOf(result.get("size").toString()));
                 imageEntity.setDownload(true);
