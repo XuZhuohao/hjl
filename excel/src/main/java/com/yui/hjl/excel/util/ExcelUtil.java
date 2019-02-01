@@ -20,36 +20,10 @@ import java.util.Map;
  * @date 2018/12/19
  */
 public class ExcelUtil {
-    private static Map<CellType, Method> VALUE_METHOD;
 
-    static {
-        VALUE_METHOD = new HashMap<>(16);
-        try {
-            VALUE_METHOD.put(CellType.BOOLEAN, Cell.class.getMethod("getBooleanCellValue"));
-            VALUE_METHOD.put(CellType.ERROR, Cell.class.getMethod("getErrorCellValue"));
-            VALUE_METHOD.put(CellType.NUMERIC, Cell.class.getMethod("getNumericCellValue"));
-            VALUE_METHOD.put(CellType.STRING, Cell.class.getMethod("getStringCellValue"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static String getValue(Cell cell) {
-        final Method method = VALUE_METHOD.get(cell.getCellType());
-        if (method == null) {
-            return "";
-        } else {
-            try {
-                return String.valueOf(method.invoke(cell));
-            } catch (Exception e) {
-                System.err.println("反射获取表格的值失败！");
-                throw new RuntimeException(e.getLocalizedMessage());
-            }
-        }
-    }
     public static void main(String[] args) throws Exception {
         final long start = System.currentTimeMillis();
-        File file = new File("D:\\data\\excel\\t1.xlsx");
+        File file = new File("D:\\data\\excel\\receive.xlsx");
         XSSFWorkbook excel = new XSSFWorkbook(new FileInputStream(file));
         ExcelDataInfo excelDataInfo = new ExcelDataInfo(excel);
         final List<ExcelDataInfo.ExRowInfo> sheet1 = excelDataInfo.getList("Sheet1", 0, 13, 0, -1);

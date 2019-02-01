@@ -5,12 +5,14 @@ import com.yui.hjl.excel.util.PatternUtil;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellAddress;
 import org.apache.poi.xssf.usermodel.XSSFName;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +54,7 @@ public class ExcelDataInfo {
                     ExCellInfo exCellInfo = new ExCellInfo();
                     exCellInfo.setCol(cell.getAddress().getColumn());
                     exCellInfo.setRow(cell.getAddress().getRow());
-                    exCellInfo.setValue(ExcelUtil.getValue(cell));
+                    exCellInfo.setValue(ExcelDataInfo.getValue(cell));
                     exRowInfo.getExCellInfo().put(exCellInfo.getCol(), exCellInfo);
                 }
                 exSheetInfo.getExRowInfo().put(exRowInfo.getRowIndex(), exRowInfo);
@@ -156,7 +158,33 @@ public class ExcelDataInfo {
         }
         return result;
     }
+    private static Map<CellType, Method> VALUE_METHOD;
 
+    static {
+        VALUE_METHOD = new HashMap<>(16);
+        try {
+            VALUE_METHOD.put(CellType.BOOLEAN, Cell.class.getMethod("getBooleanCellValue"));
+            VALUE_METHOD.put(CellType.ERROR, Cell.class.getMethod("getErrorCellValue"));
+            VALUE_METHOD.put(CellType.NUMERIC, Cell.class.getMethod("getNumericCellValue"));
+            VALUE_METHOD.put(CellType.STRING, Cell.class.getMethod("getStringCellValue"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getValue(Cell cell) {
+        final Method method = VALUE_METHOD.get(cell.getCellType());
+        if (method == null) {
+            return "";
+        } else {
+            try {
+                return String.valueOf(method.invoke(cell));
+            } catch (Exception e) {
+                System.err.println("反射获取表格的值失败！");
+                throw new RuntimeException(e.getLocalizedMessage());
+            }
+        }
+    }
     /**
      * =======================内部类=========================
      */
