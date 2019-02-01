@@ -30,7 +30,7 @@ public class ImportExcelUtil {
         return null;
     }
     public static void main(String[] args) {
-        File file = new File("D:\\Projects\\hjl\\excel\\file\\test\\t2.xlsx");
+        File file = new File("file/test/t2.xlsx");
         ExcelData excelData = new ExcelData(file, 0);
         while(excelData.nextSheet() != null){
             excelData.getRow(1);
