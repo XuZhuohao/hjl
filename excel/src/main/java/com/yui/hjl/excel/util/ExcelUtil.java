@@ -1,17 +1,14 @@
 package com.yui.hjl.excel.util;
 
 import com.alibaba.fastjson.JSON;
-import com.yui.hjl.excel.domain.DataInfo;
 import com.yui.hjl.excel.domain.ExcelDataInfo;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.util.CellAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,10 +48,18 @@ public class ExcelUtil {
         }
     }
     public static void main(String[] args) throws Exception {
+        final long start = System.currentTimeMillis();
         File file = new File("D:\\data\\excel\\t1.xlsx");
         XSSFWorkbook excel = new XSSFWorkbook(new FileInputStream(file));
         ExcelDataInfo excelDataInfo = new ExcelDataInfo(excel);
-        System.out.println(JSON.toJSONString(excelDataInfo.getListOfName("thisIsAList")));
-        System.out.println(JSON.toJSONString(excelDataInfo.getExCelOfNamel("myNmae")));
+        final List<ExcelDataInfo.ExRowInfo> sheet1 = excelDataInfo.getList("Sheet1", 0, 13, 0, -1);
+        sheet1.forEach(rows ->{
+            System.out.print(rows.getRowIndex() + ":\t");
+            rows.getExCellInfo().forEach((index,cell) ->{
+                System.out.print(cell.getCol()+":"+cell.getValue()+"\t");
+            });
+            System.out.println("\n");
+        } );
+        System.out.println(System.currentTimeMillis() - start);
     }
 }

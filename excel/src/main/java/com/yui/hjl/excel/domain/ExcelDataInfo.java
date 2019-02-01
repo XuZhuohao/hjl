@@ -1,6 +1,5 @@
 package com.yui.hjl.excel.domain;
 
-import com.alibaba.fastjson.JSON;
 import com.yui.hjl.excel.util.ExcelUtil;
 import com.yui.hjl.excel.util.PatternUtil;
 import lombok.Getter;
@@ -81,7 +80,7 @@ public class ExcelDataInfo {
     /**
      * 通过 名称 获取数据
      * @param name 名称
-     * @return List<ExRowInfo>， 为 null 调用 {@link com.yui.hjl.excel.domain.ExcelDataInfo#getExCelOfNamel(java.lang.String)}
+     * @return List<ExRowInfo>， 为 null 调用 {@link com.yui.hjl.excel.domain.ExcelDataInfo#getExCelOfName(java.lang.String)}
      */
     public List<ExRowInfo> getListOfName(String name) {
         final XSSFName xssfName = this.getXssfName().get(name);
@@ -98,7 +97,7 @@ public class ExcelDataInfo {
      * @param name 名称
      * @return ExCellInfo
      */
-    public ExCellInfo getExCelOfNamel(String name) {
+    public ExCellInfo getExCelOfName(String name) {
         final XSSFName xssfName = this.getXssfName().get(name);
         final String refersToFormula = xssfName.getRefersToFormula();
         return this.getCell(this.getCellInfo(refersToFormula));
@@ -163,21 +162,21 @@ public class ExcelDataInfo {
      */
     @Setter
     @Getter
-    private class ExSheetInfo {
+    public class ExSheetInfo {
         private String sheetName;
         private Map<Integer, ExRowInfo> exRowInfo;
     }
 
     @Setter
     @Getter
-    private class ExRowInfo {
+    public class ExRowInfo {
         private Integer rowIndex;
         private Map<Integer, ExCellInfo> exCellInfo;
     }
 
     @Setter
     @Getter
-    private class ExCellInfo {
+    public class ExCellInfo {
         private Integer row;
         private Integer col;
         private String value;
