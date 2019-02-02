@@ -123,6 +123,20 @@ public class ExcelData {
         this.cellIndex = this.row.getFirstCellNum();
         return this.row;
     }
+
+    public Cell getCell(String sheetName, Integer rowIndex, int cellIndex){
+        final XSSFSheet tempSheet = this.sheet;
+        final Row tempRow = this.row;
+        if (sheetName == null){
+            sheetName = this.sheet.getSheetName();
+        }
+        if (sheetName == null){
+            sheetName = this.sheet.getSheetName();
+        }
+
+        return this.excel.getSheet(sheetName).getRow(rowIndex).getCell(cellIndex);
+    }
+
     /**
      * 根据 index 获取 Cell
      * @param index Cell index

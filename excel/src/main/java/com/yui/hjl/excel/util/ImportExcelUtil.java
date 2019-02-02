@@ -32,16 +32,19 @@ public class ImportExcelUtil {
     public static void main(String[] args) {
         File file = new File("file/test/t2.xlsx");
         ExcelData excelData = new ExcelData(file, 0);
-        while(excelData.nextSheet() != null){
-            excelData.getRow(1);
-            while (excelData.nextRow() != null){
-                while (excelData.nextCell() != null) {
-                    System.out.print(ExcelUtil.getValue(excelData.getCell()) + "\t");
-                }
-                System.out.println();
-            }
-            System.out.println("===================================================");
-        }
+        excelData.getRow(10);
+        System.out.println(ExcelUtil.getValue(excelData.getCell(2)));
+        System.out.println(ExcelUtil.getValue(excelData.getCell(null, null, 2)));
+//        while(excelData.nextSheet() != null){
+//            excelData.getRow(1);
+//            while (excelData.nextRow() != null){
+//                while (excelData.nextCell() != null) {
+//                    System.out.print(ExcelUtil.getValue(excelData.getCell()) + "\t");
+//                }
+//                System.out.println();
+//            }
+//            System.out.println("===================================================");
+//        }
     }
 
 }
