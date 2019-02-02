@@ -19,22 +19,25 @@ import java.util.List;
  */
 public class ImportExcelUtil {
 
-    public static <T> List<T> importExcel(Class t, File file, int startRow, String sheetName){
+    public static <T> List<T> importExcel(Class<T> t, File file, int startRow, String sheetName){
         List<T> array = new ArrayList<>(16);
         for (Field declaredField : t.getDeclaredFields()) {
             if (!declaredField.isAnnotationPresent(ImportExcel.class)) {
                 continue;
             }
             final ImportExcel annotation = declaredField.getAnnotation(ImportExcel.class);
+            System.out.println(annotation.column());
         }
+
         return null;
     }
     public static void main(String[] args) {
-        File file = new File("file/test/t2.xlsx");
-        ExcelData excelData = new ExcelData(file, 0);
-        excelData.getRow(10);
-        System.out.println(ExcelUtil.getValue(excelData.getCell(2)));
-        System.out.println(ExcelUtil.getValue(excelData.getCell(null, null, 2)));
+        final List<Human> humans = importExcel(Human.class, null, 0, "1");
+//        File file = new File("file/test/t2.xlsx");
+//        ExcelData excelData = new ExcelData(file, 0);
+//        excelData.getRow(10);
+//        System.out.println(ExcelUtil.getValue(excelData.getCell(2)));
+//        System.out.println(ExcelUtil.getValue(excelData.getCell(null, null, 2)));
 //        while(excelData.nextSheet() != null){
 //            excelData.getRow(1);
 //            while (excelData.nextRow() != null){
