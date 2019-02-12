@@ -15,6 +15,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface ImportExcel {
     /**
+     * 行记录，{1} 固定取1行的数据， {1， -1} 1到行位
+     */
+    int[] row() default {1, -1};
+    /**
      * 列
      * @return 列
      */

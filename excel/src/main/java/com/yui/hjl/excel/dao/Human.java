@@ -14,14 +14,14 @@ import java.util.Date;
 @Setter
 @Getter
 public class Human {
-    @ImportExcel(column = 1)
+    @ImportExcel(column = 1,row={1})
     private String name;
     @ImportExcel(column = 2)
     private int age;
     @ImportExcel(column = 3)
     private String adress;
-    @ImportExcel(column = 4, format = @ExcelFormat(type = Date.class, format = "yyyy年m月DD日"))
+/*    @ImportExcel(column = 4, format = @ExcelFormat(type = Date.class, format = "yyyy年m月DD日"))
     private Date birthday;
     @ImportExcel(column = 5)
-    private Date birthday02;
+    private Date birthday02;*/
 }

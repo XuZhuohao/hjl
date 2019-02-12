@@ -1,5 +1,7 @@
 package com.yui.hjl.excel.runtime;
 
+import com.yui.hjl.excel.annotation.ExcelFormat;
+
 import java.util.Date;
 
 /**
@@ -10,8 +12,9 @@ import java.util.Date;
  */
 public class ExcelFormatDate extends AbstractExcelFormat<Date> {
     @Override
-    public Date getValue(Object obj) {
+    public Date getValue(Object obj, ExcelFormat format) {
 
         return null;
     }
+
 }

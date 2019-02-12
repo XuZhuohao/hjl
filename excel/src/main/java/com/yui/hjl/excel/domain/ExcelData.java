@@ -151,4 +151,8 @@ public class ExcelData {
         return this.cell;
     }
 
+    public Cell getCellUnMove(int rowIndex, int cellIndex){
+        return this.getSheet().getRow(rowIndex).getCell(cellIndex);
+    }
+
 }
