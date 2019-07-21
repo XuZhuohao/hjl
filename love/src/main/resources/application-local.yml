@@ -17,3 +17,6 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 server:
   port: 9091
+file:
+  save:
+    path: F://data//file
