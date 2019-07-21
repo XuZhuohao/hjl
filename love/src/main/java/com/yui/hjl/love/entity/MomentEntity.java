@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author XuZhuohao
@@ -43,15 +44,11 @@ public class MomentEntity extends BaseEntity {
     @Column
     private String locale;
     /**
-     * 图片地址
+     * 附件地址,包括附件和图片，根据属性区分
      */
-    @Column
-    private String imageUri;
-    /**
-     * 附件地址
-     */
-    @Column
-    private String accessoryUri;
+    @OneToMany(targetEntity = FileEntity.class ,cascade = {CascadeType.DETACH})
+    @JoinColumn(name = "moment_id")
+    private List<FileEntity> files;
 
     @ManyToOne(targetEntity = FetterEntity.class, cascade={CascadeType.DETACH})
     @JoinColumn(name = "fetter_id")
